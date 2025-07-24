@@ -1,4 +1,7 @@
-/* Reset and Base Styles */
+/* ==========================================================================
+   Base Styles & Reset
+   ========================================================================== */
+
 * {
     margin: 0;
     padding: 0;
@@ -13,27 +16,26 @@ body {
     line-height: 1.6;
 }
 
-/* Container Styles */
+/* ==========================================================================
+   Layout & Container
+   ========================================================================== */
+
 .container-fluid {
     padding: 20px;
     max-width: 800px;
     margin: 0 auto;
 }
 
-/* Responsive Container Widths */
-@media (min-width: 768px) and (max-width: 991px) {
-    .container-fluid {
-        max-width: 900px;
-    }
+.projects-section {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-@media (min-width: 992px) {
-    .container-fluid {
-        max-width: 1000px;
-    }
-}
+/* ==========================================================================
+   Logo Section
+   ========================================================================== */
 
-/* Logo Section */
 .logo-section {
     margin-bottom: 2rem;
     padding-top: 20px;
@@ -50,22 +52,20 @@ body {
     transform: translateY(-2px);
 }
 
-
-
-/* Projects Section */
-.projects-section {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
+/* ==========================================================================
+   Projects Grid
+   ========================================================================== */
 
 .projects-container {
     display: grid;
     gap: 20px;
-    grid-template-columns: repeat(1, 1fr); /* 1 col for xs and sm */
+    grid-template-columns: 1fr;
 }
 
-/* Project Card Styles */
+/* ==========================================================================
+   Project Cards
+   ========================================================================== */
+
 .project-card {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 16px;
@@ -81,7 +81,13 @@ body {
     overflow: hidden;
 }
 
-/* Project Card with Hero Image */
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 1);
+}
+
+/* Hero Image Cards */
 .project-card.has-hero-image {
     background: rgba(255, 255, 255, 0.95);
     color: #333;
@@ -89,21 +95,6 @@ body {
 
 .project-card.has-hero-image .project-content {
     margin-bottom: 16px;
-}
-
-.project-hero-image {
-    width: 100%;
-    height: 200px;
-    object-fit: contain;
-    border-radius: 12px 12px 0 0;
-    margin-bottom: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    background-color: #f8f9fa;
-}
-
-.project-hero-image:hover {
-    transform: scale(1.02);
 }
 
 .project-card.has-hero-image .project-title {
@@ -131,33 +122,43 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.project-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-    background: rgba(255, 255, 255, 1);
+/* ==========================================================================
+   Hero Images
+   ========================================================================== */
+
+.hero-link {
+    display: block;
+    text-decoration: none;
+    transition: transform 0.3s ease;
 }
 
-/* Project Content */
+.hero-link:hover {
+    transform: scale(1.02);
+}
+
+.project-hero-image {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 12px 12px 0 0;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+.project-hero-image:hover {
+    transform: scale(1.02);
+}
+
+/* ==========================================================================
+   Project Content
+   ========================================================================== */
+
 .project-content {
     flex: 1;
     text-align: center;
     margin-bottom: 20px;
-}
-
-/* Prevent breaking city names */
-.project-title,
-.project-description,
-.bio-title,
-.bio-description {
-    word-break: keep-all;
-    overflow-wrap: break-word;
-    hyphens: none;
-}
-
-/* City name protection */
-.city-name {
-    white-space: nowrap;
-    display: inline-block;
 }
 
 .project-title {
@@ -165,6 +166,9 @@ body {
     font-weight: 600;
     color: #333;
     margin-bottom: 12px;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    hyphens: none;
 }
 
 .project-description {
@@ -173,9 +177,20 @@ body {
     margin-bottom: 0;
     font-weight: 400;
     line-height: 1.5;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    hyphens: none;
 }
 
-/* Project Footer with Social Links */
+.city-name {
+    white-space: nowrap;
+    display: inline-block;
+}
+
+/* ==========================================================================
+   Social Links
+   ========================================================================== */
+
 .project-footer {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     padding-top: 16px;
@@ -213,53 +228,28 @@ body {
     transition: all 0.1s ease;
 }
 
-.social-link:active {
-    transform: translateY(0);
+.social-link:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
 }
 
-/* Social Media Specific Colors */
-.social-link[href*="facebook"]:hover {
-    color: #1877f2;
-}
-
-.social-link[href*="instagram"]:hover {
-    color: #e4405f;
-}
-
+/* Social Media Colors */
+.social-link[href*="facebook"]:hover { color: #1877f2; }
+.social-link[href*="instagram"]:hover { color: #e4405f; }
 .social-link[href*="twitter"]:hover,
-.social-link[href*="x.com"]:hover {
-    color: #1da1f2;
-}
+.social-link[href*="x.com"]:hover { color: #1da1f2; }
+.social-link[href*="linkedin"]:hover { color: #0077b5; }
+.social-link[href*="github"]:hover { color: #333; }
+.social-link[href*="youtube"]:hover { color: #ff0000; }
+.social-link[href*="discord"]:hover { color: #5865f2; }
+.social-link[href*="slack"]:hover { color: #4a154b; }
+.social-link[href*="meetup"]:hover { color: #ed1c40; }
+.social-link[href*="mailto"]:hover { color: #ea4335; }
 
-.social-link[href*="linkedin"]:hover {
-    color: #0077b5;
-}
+/* ==========================================================================
+   Footer
+   ========================================================================== */
 
-.social-link[href*="github"]:hover {
-    color: #333;
-}
-
-.social-link[href*="youtube"]:hover {
-    color: #ff0000;
-}
-
-.social-link[href*="discord"]:hover {
-    color: #5865f2;
-}
-
-.social-link[href*="slack"]:hover {
-    color: #4a154b;
-}
-
-.social-link[href*="meetup"]:hover {
-    color: #ed1c40;
-}
-
-.social-link[href*="mailto"]:hover {
-    color: #ea4335;
-}
-
-/* Footer Section */
 .footer-section {
     margin-top: 3rem;
 }
@@ -270,110 +260,10 @@ body {
     font-weight: 400;
 }
 
-/* Responsive Design */
-@media (min-width: 481px) and (max-width: 767px) {
-    .logo-img {
-        max-width: 250px;
-        width: auto;
-    }
-}
+/* ==========================================================================
+   Animations
+   ========================================================================== */
 
-@media (max-width: 767px) {
-    .container-fluid {
-        padding: 15px;
-    }
-    
-    .projects-container {
-        grid-template-columns: repeat(1, 1fr); /* 1 col for xs and sm */
-        gap: 15px;
-    }
-    
-    .project-card {
-        padding: 20px;
-    }
-    
-    .project-title {
-        font-size: 1.3rem;
-    }
-    
-    .project-footer {
-        gap: 12px;
-        padding-top: 12px;
-    }
-    
-    .social-link {
-        width: 36px;
-        height: 36px;
-        font-size: 1rem;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-    .projects-container {
-        grid-template-columns: repeat(2, 1fr); /* 2 cols for md */
-        gap: 18px;
-    }
-    
-    .project-hero-image {
-        height: 220px;
-    }
-}
-
-@media (min-width: 992px) {
-    .projects-container {
-        grid-template-columns: repeat(3, 1fr); /* 3 cols for lg and larger */
-        gap: 20px;
-    }
-    
-    .project-card {
-        padding: 16px;
-    }
-    
-    .project-card .project-content {
-        margin-bottom: 12px;
-    }
-    
-    .project-card .project-footer {
-        padding-top: 12px;
-    }
-    
-    .logo-img {
-        max-width: 400px;
-    }
-}
-
-@media (max-width: 480px) {
-    .logo-img {
-        max-width: 100%;
-        width: 100%;
-    }
-    
-    .projects-container {
-        grid-template-columns: repeat(1, 1fr); /* Keep 1 col for very small screens */
-        gap: 12px;
-    }
-    
-    .project-card {
-        padding: 16px;
-    }
-    
-    .project-title {
-        font-size: 1.2rem;
-    }
-    
-    .project-footer {
-        gap: 10px;
-        padding-top: 10px;
-    }
-    
-    .social-link {
-        width: 32px;
-        height: 32px;
-        font-size: 0.9rem;
-    }
-}
-
-/* Animation Classes */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -394,51 +284,98 @@ body {
 .projects-container .project-card:nth-child(2) { animation-delay: 0.2s; }
 .projects-container .project-card:nth-child(3) { animation-delay: 0.3s; }
 
-/* Loading State */
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+
+/* Extra Small (xs) */
+@media (max-width: 480px) {
+    .container-fluid { padding: 15px; }
+    
+    .logo-img {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .projects-container {
+        gap: 12px;
+    }
+    
+    .project-card { padding: 16px; }
+    .project-title { font-size: 1.2rem; }
+    .project-footer { 
+        gap: 10px;
+        padding-top: 10px;
+    }
+    .social-link {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Small (sm) */
+@media (min-width: 481px) and (max-width: 767px) {
+    .logo-img {
+        max-width: 250px;
+        width: auto;
+    }
+    
+    .projects-container { gap: 15px; }
+    .project-card { padding: 20px; }
+    .project-title { font-size: 1.3rem; }
+    .project-footer { 
+        gap: 12px;
+        padding-top: 12px;
+    }
+    .social-link {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+}
+
+/* Medium (md) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .container-fluid { max-width: 900px; }
+    
+    .projects-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+    }
+    
+    .project-hero-image { height: 220px; }
+}
+
+/* Large (lg) and larger */
+@media (min-width: 992px) {
+    .container-fluid { max-width: 1000px; }
+    
+    .projects-container {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    
+    .project-card { padding: 16px; }
+    .project-card .project-content { margin-bottom: 12px; }
+    .project-card .project-footer { padding-top: 12px; }
+    
+    .logo-img { max-width: 400px; }
+}
+
+/* ==========================================================================
+   Utility Classes
+   ========================================================================== */
+
 .loading {
     opacity: 0.7;
     pointer-events: none;
 }
 
-/* Focus States for Accessibility */
-.social-link:focus {
-    outline: 2px solid #007bff;
-    outline-offset: 2px;
-}
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
 
-/* Error Message Styles */
-.error-message {
-    text-align: center;
-    padding: 40px 20px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 16px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
-
-.error-message p {
-    color: #666;
-    margin-bottom: 20px;
-    font-size: 1.1rem;
-}
-
-.error-message .btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    color: white;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.error-message .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Print Styles */
 @media print {
     body {
         background: white;
