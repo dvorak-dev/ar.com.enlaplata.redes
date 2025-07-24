@@ -66,6 +66,44 @@ body {
     border: 0;
 }
 
+/* Skip links for keyboard navigation */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--card-bg);
+    color: var(--text-color);
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 1000;
+    transition: top 0.3s ease;
+    border: 1px solid var(--card-border);
+}
+
+.skip-link:focus {
+    top: 6px;
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+}
+
+/* Focus styles for better keyboard navigation */
+a:focus,
+button:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+}
+
+/* Ensure focus is visible on all interactive elements */
+.social-link:focus,
+.footer-social-link:focus,
+.theme-toggle:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+}
+
+
+
 /* ==========================================================================
    Layout & Container
    ========================================================================== */
@@ -266,61 +304,51 @@ body {
     flex-wrap: wrap;
 }
 
-.social-link {
-    display: inline-flex;
+/* ==========================================================================
+   Link Buttons (used for both cards and footer)
+   ========================================================================== */
+
+.link-button {
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 40px;
     height: 40px;
+    color: var(--footer-text);
+    text-decoration: none;
+    font-size: 1.2rem;
     border-radius: 50%;
-    background: var(--social-bg);
-    color: var(--social-color);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border: 1px solid var(--social-border);
-    font-size: 1.1rem;
-}
-
-.social-link:hover {
-    transform: translateY(-3px);
     background: var(--card-bg);
-    box-shadow: 0 6px 20px var(--card-shadow);
+    border: 1px solid var(--card-border);
+    transition: all 0.3s ease;
+}
+
+.link-button:hover {
+    color: var(--text-color);
+    background: var(--social-bg);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--card-shadow);
     text-decoration: none;
 }
 
-.social-link:active {
+.link-button:active {
     transform: translateY(-1px);
     transition: all 0.1s ease;
 }
 
-.social-link:focus {
+.link-button:focus {
     outline: 2px solid #007bff;
     outline-offset: 2px;
 }
 
-/* Social Media Colors */
-.social-link[href*="facebook"]:hover { color: #1877f2; }
-.social-link[href*="instagram"]:hover { color: #e4405f; }
-.social-link[href*="twitter"]:hover,
-.social-link[href*="x.com"]:hover { color: #1da1f2; }
-.social-link[href*="linkedin"]:hover { color: #0077b5; }
-.social-link[href*="github"]:hover { color: #333; }
-.social-link[href*="youtube"]:hover { color: #ff0000; }
-.social-link[href*="discord"]:hover { color: #5865f2; }
-.social-link[href*="slack"]:hover { color: #4a154b; }
-.social-link[href*="meetup"]:hover { color: #ed1c40; }
-.social-link[href*="mailto"]:hover { color: #ea4335; }
+
 
 /* ==========================================================================
    Footer
    ========================================================================== */
 
 .footer-section {
-    margin-top: 3rem;
-}
-
-.footer-section {
-    margin-top: 4rem;
+    margin-top: 1rem;
     padding: 3rem 0 2rem 0;
 }
 
@@ -538,7 +566,7 @@ body {
         gap: 10px;
         padding-top: 10px;
     }
-    .social-link {
+    .link-button {
         width: 32px;
         height: 32px;
         font-size: 0.9rem;
@@ -576,7 +604,7 @@ body {
         gap: 12px;
         padding-top: 12px;
     }
-    .social-link {
+    .link-button {
         width: 36px;
         height: 36px;
         font-size: 1rem;
@@ -644,7 +672,7 @@ body {
         color: black;
     }
     
-    .social-link {
+    .link-button {
         background: white;
         border: 1px solid #ddd;
         color: black;

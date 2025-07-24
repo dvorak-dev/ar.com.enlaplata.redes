@@ -31,6 +31,12 @@ class ThemeManager {
         document.documentElement.setAttribute('data-theme', theme);
         this.currentTheme = theme;
         this.setStoredTheme(theme);
+        
+        // Update button accessibility
+        if (this.themeToggle) {
+            this.themeToggle.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+            this.themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro');
+        }
     }
 
     toggleTheme() {
