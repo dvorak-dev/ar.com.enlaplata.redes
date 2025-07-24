@@ -1,7 +1,94 @@
 // App.js - Simple JavaScript for Redes en La Plata Projects
 
+// Theme management
+class ThemeManager {
+    constructor() {
+        this.themeToggle = document.getElementById('themeToggle');
+        console.log('Theme toggle element:', this.themeToggle); // Debug
+        this.currentTheme = this.getStoredTheme() || this.getSystemTheme();
+        this.init();
+    }
+
+    init() {
+        this.applyTheme(this.currentTheme);
+        this.setupEventListeners();
+    }
+
+    getSystemTheme() {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    getStoredTheme() {
+        return localStorage.getItem('theme');
+    }
+
+    setStoredTheme(theme) {
+        localStorage.setItem('theme', theme);
+    }
+
+    applyTheme(theme) {
+        console.log('Applying theme:', theme); // Debug
+        document.documentElement.setAttribute('data-theme', theme);
+        this.currentTheme = theme;
+        this.setStoredTheme(theme);
+    }
+
+    toggleTheme() {
+        const newTheme = this.currentTheme === 'light' ? 'dark' : 'light';
+        console.log('Toggling theme from', this.currentTheme, 'to', newTheme); // Debug
+        this.applyTheme(newTheme);
+    }
+
+    setupEventListeners() {
+        // Theme toggle button
+        if (this.themeToggle) {
+            this.themeToggle.addEventListener('click', () => {
+                console.log('Theme toggle clicked!'); // Debug
+                this.toggleTheme();
+            });
+
+            // Keyboard navigation for theme toggle
+            this.themeToggle.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    console.log('Theme toggle keyboard activated!'); // Debug
+                    this.toggleTheme();
+                }
+            });
+        } else {
+            console.error('Theme toggle button not found!');
+        }
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!this.getStoredTheme()) {
+                // Only auto-switch if user hasn't manually set a preference
+                this.applyTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Redes en La Plata - Projects loaded successfully');
+    
+    // Simple test for theme toggle
+    const testButton = document.getElementById('themeToggle');
+    console.log('Test button found:', testButton);
+    
+    if (testButton) {
+        testButton.addEventListener('click', function() {
+            console.log('Button clicked!');
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            console.log('Switching from', currentTheme, 'to', newTheme);
+            html.setAttribute('data-theme', newTheme);
+        });
+    }
+    
+    // Initialize theme manager
+    const themeManager = new ThemeManager();
     
     // Add smooth scroll behavior
     document.documentElement.style.scrollBehavior = 'smooth';
