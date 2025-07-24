@@ -36,40 +36,21 @@ body {
 /* Logo Section */
 .logo-section {
     margin-bottom: 2rem;
+    padding-top: 20px;
 }
 
 .logo-img {
-    max-width: 200px;
+    max-width: 300px;
+    width: 100%;
     height: auto;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
 .logo-img:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
 }
 
-/* Bio Section */
-.bio-section {
-    margin-bottom: 2.5rem;
-}
 
-.bio-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: white;
-    margin-bottom: 0.5rem;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.bio-description {
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 400;
-    margin-bottom: 0;
-}
 
 /* Projects Section */
 .projects-section {
@@ -290,21 +271,16 @@ body {
 }
 
 /* Responsive Design */
+@media (min-width: 481px) and (max-width: 767px) {
+    .logo-img {
+        max-width: 250px;
+        width: auto;
+    }
+}
+
 @media (max-width: 767px) {
     .container-fluid {
         padding: 15px;
-    }
-    
-    .bio-title {
-        font-size: 2rem;
-    }
-    
-    .bio-description {
-        font-size: 1rem;
-    }
-    
-    .logo-img {
-        max-width: 150px;
     }
     
     .projects-container {
@@ -332,7 +308,7 @@ body {
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 991px) {
     .projects-container {
         grid-template-columns: repeat(2, 1fr); /* 2 cols for md */
         gap: 18px;
@@ -360,15 +336,16 @@ body {
     .project-card .project-footer {
         padding-top: 12px;
     }
+    
+    .logo-img {
+        max-width: 400px;
+    }
 }
 
 @media (max-width: 480px) {
-    .bio-title {
-        font-size: 1.8rem;
-    }
-    
     .logo-img {
-        max-width: 120px;
+        max-width: 100%;
+        width: 100%;
     }
     
     .projects-container {
@@ -406,12 +383,6 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-.logo-section,
-.bio-section,
-.projects-container {
-    animation: fadeInUp 0.8s ease-out;
 }
 
 .projects-container .project-card {
