@@ -51,6 +51,22 @@ body {
 }
 
 /* ==========================================================================
+   Accessibility
+   ========================================================================== */
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ==========================================================================
    Layout & Container
    ========================================================================== */
 
@@ -306,13 +322,21 @@ body {
 .footer-section {
     margin-top: 4rem;
     padding: 3rem 0 2rem 0;
-    border-top: 1px solid var(--footer-border);
 }
 
 .footer-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+}
+
+.footer-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 2rem;
+    border-top: 1px solid var(--footer-border);
+    padding-top: 2rem;
 }
 
 .footer-main {
@@ -526,7 +550,9 @@ body {
     }
     
     .footer-bottom-content {
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
         gap: 1rem;
         text-align: left;
     }
