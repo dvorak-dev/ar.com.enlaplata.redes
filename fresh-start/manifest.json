@@ -1,7 +1,7 @@
 {
   "name": "Redes en La Plata",
   "short_name": "Redes LP",
-  "description": "Connecting digital communities",
+  "description": "Conectando comunidades digitales",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#667eea",

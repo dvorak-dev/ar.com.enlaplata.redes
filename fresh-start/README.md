@@ -28,31 +28,55 @@ fresh-start/
 
 ## 🛠️ Customization
 
-### 1. Edit Project Information
+### 1. Edit Projects (Recommended - JSON Configuration)
 
-Open `index.html` and modify the project sections:
+The easiest way to manage projects is by editing the `config/projects.json` file:
 
-```html
-<div class="project-card">
-    <div class="project-header">
-        <h3 class="project-title">Your Project Name</h3>
-        <p class="project-description">Your project description</p>
-    </div>
-    <div class="project-links">
-        <!-- Your project links here -->
-    </div>
-</div>
+```json
+{
+  "organization": {
+    "name": "Your Organization Name",
+    "description": "Your organization description",
+    "logo": "./images/logo.png"
+  },
+  "projects": [
+    {
+      "id": "your-project-id",
+      "title": "Your Project Name",
+      "description": "Your project description",
+      "links": [
+        {
+          "platform": "facebook",
+          "type": "page",
+          "url": "https://facebook.com/yourpage",
+          "icon": "fab fa-facebook",
+          "title": "Facebook Page"
+        }
+      ]
+    }
+  ]
+}
 ```
 
-### 2. Add/Edit Project Links
+### 2. Add New Projects
 
-For each project, add links within the `project-links` div:
+To add a new project, add a new object to the `projects` array:
 
-```html
-<a href="YOUR_URL_HERE" class="project-link" target="_blank" rel="noopener noreferrer">
-    <i class="fab fa-facebook"></i>
-    <span>Facebook Page</span>
-</a>
+```json
+{
+  "id": "new-project",
+  "title": "New Project",
+  "description": "Description of your new project",
+  "links": [
+    {
+      "platform": "instagram",
+      "type": "account",
+      "url": "https://instagram.com/yourproject",
+      "icon": "fab fa-instagram",
+      "title": "Instagram"
+    }
+  ]
+}
 ```
 
 ### 3. Change Personal Information

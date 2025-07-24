@@ -3,38 +3,23 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Redes en La Plata - Projects loaded successfully');
     
-    // Add click tracking for analytics (optional)
-    const projectLinks = document.querySelectorAll('.project-link');
-    const projectLogoLinks = document.querySelectorAll('.project-logo-link');
+    // Add smooth scroll behavior
+    document.documentElement.style.scrollBehavior = 'smooth';
     
-    projectLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const linkText = this.querySelector('span').textContent;
-            const linkUrl = this.href;
-            const projectTitle = this.closest('.project-card').querySelector('.project-title').textContent;
-            
-            // Log click for analytics (you can replace this with your analytics service)
-            console.log(`Project link clicked: ${projectTitle} - ${linkText} -> ${linkUrl}`);
-            
-            // Optional: Add loading state
-            this.classList.add('loading');
-            
-            // Remove loading state after a short delay
-            setTimeout(() => {
-                this.classList.remove('loading');
-            }, 1000);
-        });
-    });
+    // Add click tracking for analytics
+    const socialLinks = document.querySelectorAll('.social-link');
     
-    projectLogoLinks.forEach(link => {
+    socialLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            const projectTitle = this.closest('.project-card').querySelector('.project-title').textContent;
+            const projectCard = this.closest('.project-card');
+            const projectTitle = projectCard.querySelector('.project-title').textContent;
+            const linkTitle = this.getAttribute('title');
             const linkUrl = this.href;
             
             // Log click for analytics
-            console.log(`Project website clicked: ${projectTitle} -> ${linkUrl}`);
+            console.log(`Project link clicked: ${projectTitle} - ${linkTitle} -> ${linkUrl}`);
             
-            // Optional: Add loading state
+            // Add loading state
             this.classList.add('loading');
             
             // Remove loading state after a short delay
@@ -44,30 +29,27 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Add smooth scroll behavior for better UX
-    document.documentElement.style.scrollBehavior = 'smooth';
-    
     // Add keyboard navigation support
     document.addEventListener('keydown', function(e) {
-        const projectLinks = document.querySelectorAll('.project-link');
-        const currentIndex = Array.from(projectLinks).findIndex(link => link === document.activeElement);
+        const socialLinks = document.querySelectorAll('.social-link');
+        const currentIndex = Array.from(socialLinks).findIndex(link => link === document.activeElement);
         
         switch(e.key) {
             case 'ArrowDown':
                 e.preventDefault();
-                if (currentIndex < projectLinks.length - 1) {
-                    projectLinks[currentIndex + 1].focus();
+                if (currentIndex < socialLinks.length - 1) {
+                    socialLinks[currentIndex + 1].focus();
                 }
                 break;
             case 'ArrowUp':
                 e.preventDefault();
                 if (currentIndex > 0) {
-                    projectLinks[currentIndex - 1].focus();
+                    socialLinks[currentIndex - 1].focus();
                 }
                 break;
             case 'Enter':
             case ' ':
-                if (document.activeElement.classList.contains('project-link')) {
+                if (document.activeElement.classList.contains('social-link')) {
                     e.preventDefault();
                     document.activeElement.click();
                 }
@@ -108,54 +90,4 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
         });
     }
-});
-
-// Utility function to update project links dynamically (if needed)
-function updateProjectLink(projectIndex, linkIndex, newUrl, newText, newIcon) {
-    const projectCards = document.querySelectorAll('.project-card');
-    if (projectCards[projectIndex]) {
-        const projectCard = projectCards[projectIndex];
-        const projectLinks = projectCard.querySelectorAll('.project-link');
-        if (projectLinks[linkIndex]) {
-            const link = projectLinks[linkIndex];
-            link.href = newUrl;
-            link.querySelector('span').textContent = newText;
-            link.querySelector('i').className = newIcon;
-        }
-    }
-}
-
-// Utility function to add a new project
-function addProject(title, description, links) {
-    const projectsContainer = document.querySelector('.projects-container');
-    const projectCard = document.createElement('div');
-    projectCard.className = 'project-card';
-    
-    let linksHTML = '';
-    links.forEach(link => {
-        linksHTML += `
-            <a href="${link.url}" class="project-link" target="_blank" rel="noopener noreferrer">
-                <i class="${link.icon}"></i>
-                <span>${link.text}</span>
-            </a>
-        `;
-    });
-    
-    projectCard.innerHTML = `
-        <div class="project-header">
-            <h3 class="project-title">${title}</h3>
-            <p class="project-description">${description}</p>
-        </div>
-        <div class="project-links">
-            ${linksHTML}
-        </div>
-    `;
-    
-    projectsContainer.appendChild(projectCard);
-}
-
-// Export for potential external use
-window.RedesApp = {
-    updateProjectLink: updateProjectLink,
-    addProject: addProject
-}; 
+}); 
