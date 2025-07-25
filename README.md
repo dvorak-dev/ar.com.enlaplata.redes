@@ -12,22 +12,26 @@ A modern static site for Redes en La Plata, showcasing multiple projects with th
 - **SEO Optimized**: Complete meta tags for social media
 - **Fast**: Instant loading without heavy dependencies
 - **Code Quality**: Automated linting and formatting for HTML, CSS, and JavaScript
+- **Protected Workflow**: All changes go through PRs with automated quality checks
 
 ## 📁 Project Structure
 
 ```
 ├── index.html          # Main page
 ├── css/
-│   └── style.css       # Custom styles
+│   └── style.css       # Custom styles (lexicographically sorted)
 ├── js/
 │   └── app.js          # Interactive JavaScript
 ├── images/             # Images and favicons
 ├── manifest.json       # PWA configuration
 ├── package.json        # Node.js dependencies and scripts
+├── server.js           # Custom Node.js development server
 ├── .eslintrc.json      # JavaScript linting rules
 ├── .stylelintrc.json   # CSS linting rules
 ├── .htmlhintrc         # HTML linting rules
 ├── .prettierrc         # Code formatting rules
+├── .prettierignore     # Files to ignore during formatting
+├── .gitignore          # Git ignore patterns
 └── README.md           # This file
 ```
 
@@ -39,30 +43,59 @@ To modify projects, edit the `index.html` file directly. Each project is defined
 
 ```html
 <article class="project-card has-hero-image" role="listitem" id="your-project-id">
-    <a href="YOUR_MAIN_LINK" target="_blank" rel="noopener noreferrer" class="hero-link">
-        <img src="./images/your-project-hero.png" alt="Your Project Description" class="project-hero-image">
+    <a href="YOUR_MAIN_LINK" target="_blank" rel="noopener noreferrer" class="hero-link" 
+       aria-label="Visitar página de YOUR_PROJECT" title="Visitar página">
+        <img src="./images/your-project-hero.png" alt="Your Project Description" 
+             class="project-hero-image" width="400" height="250" role="img">
     </a>
     <div class="project-content">
         <h2 class="sr-only">Your Project Name</h2>
-        <p class="project-description">Your project description</p>
+        <p class="project-description">
+            Your project description with <span class="city-name">La Plata</span> 
+            and other relevant information.
+        </p>
     </div>
     <nav class="project-footer" aria-label="Enlaces de Your Project" role="navigation">
-        <a href="YOUR_FACEBOOK_LINK" class="link-button" target="_blank" rel="noopener noreferrer">
+        <a href="YOUR_FACEBOOK_LINK" class="link-button" target="_blank" 
+           rel="noopener noreferrer" title="Página de Facebook" 
+           aria-label="Página de Facebook de Your Project">
             <i class="fab fa-facebook" aria-hidden="true"></i>
             <span class="sr-only">Facebook</span>
         </a>
-        <!-- Add more social links as needed -->
+        <a href="YOUR_GROUP_LINK" class="link-button" target="_blank" 
+           rel="noopener noreferrer" title="Grupo de Facebook" 
+           aria-label="Grupo de Facebook de Your Project">
+            <i class="fas fa-users" aria-hidden="true"></i>
+            <span class="sr-only">Grupo de Facebook</span>
+        </a>
+        <a href="YOUR_INSTAGRAM_LINK" class="link-button" target="_blank" 
+           rel="noopener noreferrer" title="Instagram" 
+           aria-label="Instagram de Your Project">
+            <i class="fab fa-instagram" aria-hidden="true"></i>
+            <span class="sr-only">Instagram</span>
+        </a>
+        <a href="mailto:your-email@gmail.com" class="link-button" title="Enviar email" 
+           aria-label="Enviar email a Your Project">
+            <i class="fas fa-envelope" aria-hidden="true"></i>
+            <span class="sr-only">Email</span>
+        </a>
     </nav>
 </article>
 ```
 
 ### 2. Add New Projects
 
-To add a new project, copy the structure above and modify:
-- `id` attribute for the project
-- Hero image in `./images/` folder
-- Project description
-- Social media links in the footer
+To add a new project:
+
+1. **Copy the template above** and place it in the `projects-container` section
+2. **Update the following elements:**
+   - `id` attribute (unique identifier)
+   - Hero image path in `./images/` folder
+   - Project description with `<span class="city-name">La Plata</span>` for city names
+   - All social media links and their `aria-label` attributes
+   - Email address
+
+3. **Add the hero image** to the `./images/` folder (recommended size: 400x250px)
 
 ### 3. Customize Colors
 
@@ -74,39 +107,6 @@ Edit `css/style.css` to change the theme colors:
     --bg-gradient-middle: rgba(253, 118, 36, 0.2);
     --bg-gradient-end: rgba(255, 189, 6, 0.15);
 }
-```
-
-### 5. Add New Projects
-
-To add a new project, copy this complete structure:
-
-```html
-<div class="project-card">
-    <div class="project-header">
-        <h3 class="project-title">New Project</h3>
-        <p class="project-description">Project description</p>
-    </div>
-    <div class="project-links">
-        <a href="URL1" class="project-link" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-facebook"></i>
-            <span>Facebook</span>
-        </a>
-        <a href="URL2" class="project-link" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-instagram"></i>
-            <span>Instagram</span>
-        </a>
-        <a href="mailto:email@domain.com" class="project-link">
-            <i class="fas fa-envelope"></i>
-            <span>Email</span>
-        </a>
-    </div>
-    <div class="project-footer">
-        <a href="PROJECT_WEBSITE_URL" class="project-logo-link" target="_blank" rel="noopener noreferrer">
-            <img src="./images/logo.png" alt="Project Name" class="project-logo">
-            <span>Visit Website</span>
-        </a>
-    </div>
-</div>
 ```
 
 ## 🚀 Deployment
@@ -197,7 +197,7 @@ To add Google Analytics, add this in the `<head>` of `index.html`:
 
 The site includes interactive features:
 
-- **Theme Toggle**: Light/dark mode switching
+- **Theme Toggle**: Light/dark mode switching with system preference detection
 - **Accessibility**: Keyboard navigation and screen reader support
 - **Responsive Design**: Automatic layout adjustments
 - **PWA Support**: Installable as a mobile app
@@ -212,6 +212,11 @@ This project uses several linters and formatters to maintain code quality:
 ```bash
 # Install dependencies
 npm install
+
+# Start development server
+npm run dev
+# or
+npm start
 
 # Run all linters
 npm run lint
@@ -236,14 +241,14 @@ npm run validate
 
 #### **Linters Used:**
 - **HTMLHint**: HTML validation and best practices
-- **Stylelint**: CSS formatting and maintainability
+- **Stylelint**: CSS formatting and maintainability (with lexicographically sorted properties)
 - **ESLint**: JavaScript code quality and modern practices
 - **Prettier**: Consistent code formatting across all files
 
 #### **GitHub Actions:**
-- Automated linting on every push and pull request
-- Auto-fix capabilities for common issues
-- Format checking to ensure consistency
+- **Lint Workflow**: Runs on all PR creation with auto-fix capabilities
+- **CI/CD Workflow**: Builds Docker images on PR creation (no direct push to main)
+- **Retag Workflow**: Retags images as `main` and `latest` on PR merge
 
 ### Local Development
 
@@ -256,6 +261,7 @@ npm run validate
    ```bash
    npm run dev
    ```
+   The site will be available at [http://localhost:8080](http://localhost:8080)
 
 3. **Run linters before committing:**
    ```bash
@@ -267,6 +273,34 @@ npm run validate
    npm run lint:fix
    npm run format
    ```
+
+### Development Server Features
+
+The custom Node.js development server (`server.js`) provides:
+
+- ✅ Proper MIME types for all file types
+- ✅ Security headers and directory traversal protection
+- ✅ Graceful error handling
+- ✅ Environment variable support (PORT, HOST)
+- ✅ Clean shutdown with Ctrl+C
+
+## 🔒 Protected Workflow
+
+This repository uses a protected `main` branch workflow:
+
+- **No direct pushes to `main`** - All changes must go through Pull Requests
+- **Automated quality checks** - Linting and formatting run on every PR
+- **Auto-fix capabilities** - GitHub Actions can automatically fix common issues
+- **Required reviews** - All PRs require approval before merging
+
+### Workflow Process:
+
+1. **Create feature branch** from `main`
+2. **Make changes** and test locally
+3. **Push branch** and create Pull Request
+4. **Automated checks** run (linting, formatting)
+5. **Review and approve** the PR
+6. **Merge to `main`** - triggers retag workflow for Docker images
 
 ## 📄 License
 
@@ -288,81 +322,3 @@ This project is under the MIT License.
 ---
 
 **Redes en La Plata** - Connecting digital communities 
-
-# Redes en La Plata - Static Site Deployment
-
-This project is a static site served by Nginx, ready for production deployment using Docker and Docker Compose.
-
-## Quick Start (Local)
-
-### Option 1: Node.js Development Server (Recommended)
-
-For local development with hot reloading and proper MIME types:
-
-```sh
-# Install dependencies (first time only)
-npm install
-
-# Start development server
-npm run dev
-# or
-npm start
-```
-
-The site will be available at [http://localhost:8080](http://localhost:8080)
-
-**Features:**
-- ✅ Proper MIME types for all file types
-- ✅ Security headers and directory traversal protection
-- ✅ Graceful error handling
-- ✅ Environment variable support (PORT, HOST)
-- ✅ Clean shutdown with Ctrl+C
-
-### Option 2: Python HTTP Server (Alternative)
-
-For quick testing without Node.js:
-
-```sh
-# Python 3
-python3 -m http.server 8080
-
-# Python 2 (if available)
-python -m SimpleHTTPServer 8080
-```
-
-### Option 3: Docker (Production-like)
-
-1. **Build the Docker image:**
-   ```sh
-   docker build -t redes-enlaplata-static .
-   ```
-
-2. **Run the container:**
-   ```sh
-   docker run -p 8080:80 redes-enlaplata-static
-   ```
-   The site will be available at [http://localhost:8080](http://localhost:8080)
-
-## Production Deployment with Docker Compose
-
-1. **Build and start the app:**
-   ```sh
-   docker compose -f docker-compose.prod.yml up --build -d
-   ```
-   The site will be available on port 80 of your server.
-
-2. **Stop the app:**
-   ```sh
-   docker compose -f docker-compose.prod.yml down
-   ```
-
-## CI/CD with GitHub Actions
-
-- This repo is ready for automated Docker builds and pushes using GitHub Actions.
-- See `.github/workflows/` for example workflows inspired by the provided `githubaction1.yml` and `githubaction2.yml`.
-- You can adapt these to build and push your static site image to GitHub Container Registry or any other registry.
-
-## Notes
-- The app is served by Nginx for maximum performance and compatibility.
-- The Docker image can be deployed to any container platform (Kubernetes, ECS, etc).
-- For custom domains or SSL, use a reverse proxy (like Nginx or Caddy) in front of this container. 
