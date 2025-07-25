@@ -51,7 +51,8 @@ function serveFile(filePath, res) {
 
 // Create HTTP server
 const server = http.createServer((req, res) => {
-  const parsedUrl = url.parse(req.url);
+  // Use WHATWG URL API instead of deprecated url.parse()
+  const parsedUrl = new URL(req.url, `http://${req.headers.host}`);
   let pathname = parsedUrl.pathname;
 
   // Default to index.html for root path
