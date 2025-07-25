@@ -1,45 +1,134 @@
 {
-  "name": "Redes en La Plata",
+  "name": "Redes en La Plata - Projects Hub",
   "short_name": "Redes LP",
-  "description": "Conectando comunidades digitales",
+  "description": "Conectando comunidades digitales en La Plata. Hub de proyectos con enlaces a redes sociales, grupos y contactos.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#667eea",
-  "theme_color": "#007bff",
+  "background_color": "#ffa010",
+  "theme_color": "#ffa010",
   "orientation": "portrait-primary",
   "icons": [
     {
       "src": "./images/android/android-icon-36x36.png",
       "sizes": "36x36",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "./images/android/android-icon-48x48.png",
       "sizes": "48x48",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "./images/android/android-icon-72x72.png",
       "sizes": "72x72",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "./images/android/android-icon-96x96.png",
       "sizes": "96x96",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "./images/android/android-icon-144x144.png",
       "sizes": "144x144",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "./images/android/android-icon-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./images/android/android-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./images/apple/apple-icon-180x180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./images/apple/apple-icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./images/apple/apple-icon-120x120.png",
+      "sizes": "120x120",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./images/apple/apple-icon-76x76.png",
+      "sizes": "76x76",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./images/apple/apple-icon-60x60.png",
+      "sizes": "60x60",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
-  "categories": ["social", "business"],
-  "lang": "es",
-  "dir": "ltr"
+  "shortcuts": [
+    {
+      "name": "Trabajos La Plata",
+      "short_name": "Trabajos",
+      "description": "Acceso directo a Trabajos La Plata",
+      "url": "/#trabajos-la-plata",
+      "icons": [
+        {
+          "src": "./images/trabajos-la-plata-hero.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Alquileres La Plata",
+      "short_name": "Alquileres",
+      "description": "Acceso directo a Alquileres La Plata",
+      "url": "/#alquileres-la-plata",
+      "icons": [
+        {
+          "src": "./images/alquileres-la-plata-hero.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Eventos La Plata",
+      "short_name": "Eventos",
+      "description": "Acceso directo a Eventos La Plata",
+      "url": "/#eventos-la-plata",
+      "icons": [
+        {
+          "src": "./images/eventos-la-plata-hero.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "categories": ["social", "business", "productivity", "lifestyle"],
+  "lang": "es-AR",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
 } 

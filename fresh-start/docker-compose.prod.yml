@@ -1,0 +1,7 @@
+services:
+  app:
+    build: .
+    image: redes-enlaplata-static:latest
+    ports:
+      - "80:80"
+    restart: unless-stopped 

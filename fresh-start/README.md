@@ -247,3 +247,60 @@ This project is under the MIT License.
 ---
 
 **Redes en La Plata** - Connecting digital communities 
+
+# Redes en La Plata - Static Site Deployment
+
+This project is a static site served by Nginx, ready for production deployment using Docker and Docker Compose.
+
+## Quick Start (Local)
+
+### Option 1: Python HTTP Server (Development)
+
+For quick local development, you can use Python's built-in HTTP server:
+
+```sh
+# Python 3
+python3 -m http.server 8080
+
+# Python 2 (if available)
+python -m SimpleHTTPServer 8080
+```
+
+The site will be available at [http://localhost:8080](http://localhost:8080)
+
+### Option 2: Docker (Production-like)
+
+1. **Build the Docker image:**
+   ```sh
+   docker build -t redes-enlaplata-static .
+   ```
+
+2. **Run the container:**
+   ```sh
+   docker run -p 8080:80 redes-enlaplata-static
+   ```
+   The site will be available at [http://localhost:8080](http://localhost:8080)
+
+## Production Deployment with Docker Compose
+
+1. **Build and start the app:**
+   ```sh
+   docker compose -f docker-compose.prod.yml up --build -d
+   ```
+   The site will be available on port 80 of your server.
+
+2. **Stop the app:**
+   ```sh
+   docker compose -f docker-compose.prod.yml down
+   ```
+
+## CI/CD with GitHub Actions
+
+- This repo is ready for automated Docker builds and pushes using GitHub Actions.
+- See `.github/workflows/` for example workflows inspired by the provided `githubaction1.yml` and `githubaction2.yml`.
+- You can adapt these to build and push your static site image to GitHub Container Registry or any other registry.
+
+## Notes
+- The app is served by Nginx for maximum performance and compatibility.
+- The Docker image can be deployed to any container platform (Kubernetes, ECS, etc).
+- For custom domains or SSL, use a reverse proxy (like Nginx or Caddy) in front of this container. 

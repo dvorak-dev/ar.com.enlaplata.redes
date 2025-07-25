@@ -1,0 +1,77 @@
+name: Retag Static Site Docker Image
+
+on:
+  pull_request:
+    types: [closed]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  retag:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine PR number and commit SHA
+        id: pr_info
+        run: |
+          echo "pr_number=${{ github.event.pull_request.number }}" >> $GITHUB_OUTPUT
+          echo "commit_sha=${{ github.event.pull_request.merge_commit_sha }}" >> $GITHUB_OUTPUT
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Try to pull image by commit SHA
+        id: pull_commit
+        run: |
+          if docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.pr_info.outputs.commit_sha }}; then
+            echo "success=true" >> $GITHUB_OUTPUT
+            echo "source_tag=${{ steps.pr_info.outputs.commit_sha }}" >> $GITHUB_OUTPUT
+          else
+            echo "success=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Try to pull image by PR tag as fallback
+        id: pull_pr
+        if: steps.pull_commit.outputs.success != 'true'
+        run: |
+          if docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:pr-${{ steps.pr_info.outputs.pr_number }}; then
+            echo "success=true" >> $GITHUB_OUTPUT
+            echo "source_tag=pr-${{ steps.pr_info.outputs.pr_number }}" >> $GITHUB_OUTPUT
+          else
+            echo "success=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Fail if no image found
+        if: steps.pull_commit.outputs.success != 'true' && steps.pull_pr.outputs.success != 'true'
+        run: |
+          echo "❌ No image found for commit or PR. Aborting."
+          exit 1
+
+      - name: Tag and push as main/latest
+        run: |
+          TAG="${{ steps.pull_commit.outputs.source_tag || steps.pull_pr.outputs.source_tag }}"
+          docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:$TAG ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:main
+          docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:$TAG ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:main
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+      - name: Retag Summary
+        run: |
+          echo "✅ Static site image retagged and pushed!"
+          echo "Source: ${{ steps.pull_commit.outputs.source_tag || steps.pull_pr.outputs.source_tag }}"
+          echo "New tags: main, latest" 
