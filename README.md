@@ -11,6 +11,7 @@ A modern static site for Redes en La Plata, showcasing multiple projects with th
 - **Accessible**: Keyboard navigation and screen reader support
 - **SEO Optimized**: Complete meta tags for social media
 - **Fast**: Instant loading without heavy dependencies
+- **Code Quality**: Automated linting and formatting for HTML, CSS, and JavaScript
 
 ## 📁 Project Structure
 
@@ -22,6 +23,11 @@ A modern static site for Redes en La Plata, showcasing multiple projects with th
 │   └── app.js          # Interactive JavaScript
 ├── images/             # Images and favicons
 ├── manifest.json       # PWA configuration
+├── package.json        # Node.js dependencies and scripts
+├── .eslintrc.json      # JavaScript linting rules
+├── .stylelintrc.json   # CSS linting rules
+├── .htmlhintrc         # HTML linting rules
+├── .prettierrc         # Code formatting rules
 └── README.md           # This file
 ```
 
@@ -196,6 +202,72 @@ The site includes interactive features:
 - **Responsive Design**: Automatic layout adjustments
 - **PWA Support**: Installable as a mobile app
 
+## 🔧 Development
+
+### Code Quality Tools
+
+This project uses several linters and formatters to maintain code quality:
+
+#### **Available Scripts:**
+```bash
+# Install dependencies
+npm install
+
+# Run all linters
+npm run lint
+
+# Run individual linters
+npm run lint:html    # HTML validation
+npm run lint:css     # CSS best practices
+npm run lint:js      # JavaScript quality
+
+# Auto-fix linting issues
+npm run lint:fix
+
+# Format code with Prettier
+npm run format
+
+# Check formatting without changes
+npm run format:check
+
+# Run full validation (lint + format check)
+npm run validate
+```
+
+#### **Linters Used:**
+- **HTMLHint**: HTML validation and best practices
+- **Stylelint**: CSS formatting and maintainability
+- **ESLint**: JavaScript code quality and modern practices
+- **Prettier**: Consistent code formatting across all files
+
+#### **GitHub Actions:**
+- Automated linting on every push and pull request
+- Auto-fix capabilities for common issues
+- Format checking to ensure consistency
+
+### Local Development
+
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+2. **Start development server:**
+   ```bash
+   npm run dev
+   ```
+
+3. **Run linters before committing:**
+   ```bash
+   npm run validate
+   ```
+
+4. **Auto-fix issues:**
+   ```bash
+   npm run lint:fix
+   npm run format
+   ```
+
 ## 📄 License
 
 This project is under the MIT License.
@@ -204,9 +276,14 @@ This project is under the MIT License.
 
 1. Fork the project
 2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+3. Install dependencies (`npm install`)
+4. Make your changes
+5. Run linters (`npm run validate`)
+6. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+7. Push to the branch (`git push origin feature/AmazingFeature`)
+8. Open a Pull Request
+
+**Note:** The GitHub Actions workflow will automatically check your code quality and may create fixes for you.
 
 ---
 
@@ -218,9 +295,32 @@ This project is a static site served by Nginx, ready for production deployment u
 
 ## Quick Start (Local)
 
-### Option 1: Python HTTP Server (Development)
+### Option 1: Node.js Development Server (Recommended)
 
-For quick local development, you can use Python's built-in HTTP server:
+For local development with hot reloading and proper MIME types:
+
+```sh
+# Install dependencies (first time only)
+npm install
+
+# Start development server
+npm run dev
+# or
+npm start
+```
+
+The site will be available at [http://localhost:8080](http://localhost:8080)
+
+**Features:**
+- ✅ Proper MIME types for all file types
+- ✅ Security headers and directory traversal protection
+- ✅ Graceful error handling
+- ✅ Environment variable support (PORT, HOST)
+- ✅ Clean shutdown with Ctrl+C
+
+### Option 2: Python HTTP Server (Alternative)
+
+For quick testing without Node.js:
 
 ```sh
 # Python 3
@@ -230,9 +330,7 @@ python3 -m http.server 8080
 python -m SimpleHTTPServer 8080
 ```
 
-The site will be available at [http://localhost:8080](http://localhost:8080)
-
-### Option 2: Docker (Production-like)
+### Option 3: Docker (Production-like)
 
 1. **Build the Docker image:**
    ```sh
