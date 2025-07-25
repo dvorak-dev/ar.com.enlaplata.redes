@@ -4,8 +4,6 @@ description: >
   Builds and pushes the static site Docker image to GitHub Container Registry on push to main and on PRs.
 
 on:
-  push:
-    branches: [main]
   pull_request:
 
 env:
