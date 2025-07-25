@@ -150,7 +150,7 @@ button:focus {
 
 /* Dark mode logo enhancements for better contrast */
 [data-theme="dark"] .logo-img {
-    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.8));
+    filter: drop-shadow(0 4px 32px rgba(255,255,255,0.55));
 }
 
 /* ==========================================================================
